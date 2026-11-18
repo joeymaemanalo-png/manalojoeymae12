@@ -1,0 +1,392 @@
+import time
+
+score = 0
+completed = []  # lesson numbers the student has finished
+
+BADGES = {
+    "1": "Hello World Hero",
+    "2": "Syntax Sage",
+    "3": "Math Wizard",
+    "4": "Input Ninja",
+    "5": "Decision Maker",
+    "6": "Logic Master",
+    "7": "Loop Legend",
+}
+
+
+# COUNTDOWN FUNCTION
+def countdown():
+    print("\nGet ready! Your lesson will start in...")
+
+    for number in range(5, 0, -1):
+        print(number)
+        time.sleep(1)
+
+    print("LET'S START!")
+
+
+# HELPER: asks for a whole number and keeps asking until it gets one
+def ask_number(prompt):
+    while True:
+        text = input(prompt)
+        try:
+            return int(text)
+        except ValueError:
+            print("Please type a whole number.")
+
+
+# HELPER: gives points and a badge the FIRST time a lesson is finished
+def finish_lesson(lesson):
+    global score
+    if lesson not in completed:
+        completed.append(lesson)
+        score += 10
+        print("\nLesson complete! You earned 10 points!")
+        print("NEW BADGE UNLOCKED:", BADGES[lesson])
+    else:
+        print("\nLesson reviewed again. (Points are only given the first time.)")
+
+
+# WELCOME SCREEN
+print("======================================")
+print("          PYTHON LEARNING ADVENTURE")
+print("======================================")
+
+name = input("Enter your name: ")
+
+print("\nWelcome,", name + "!")
+print("Are you ready to learn Python?")
+
+input("\nPress ENTER to start...")
+
+
+# MAIN MENU
+while True:
+
+    print("\n======================================")
+    print("          PYTHON LEARNING ADVENTURE")
+    print("======================================")
+    print("Student:", name)
+    print("Total Points:", score)
+    print("--------------------------------------")
+    print("1. INTRODUCTION TO PROGRAMMING")
+    print("2. BASIC SYNTAX")
+    print("3. ARITHMETIC OPERATORS")
+    print("4. Basic Input and Output in Python")
+    print("5. Conditional Statement in Python")
+    print("6. Logical Operator ")
+    print("7. Introduction to Iteration and Loops")
+    print("8. VIEW MY ACHIEVEMENTS")
+    print("9. EXIT")
+    print("======================================")
+
+    choice = input("Choose your lesson: ")
+
+    # LESSON 1
+    if choice == "1":
+
+        countdown()
+
+        print("\n===== LESSON 1 =====")
+        print("INTRODUCTION TO PROGRAMMING")
+
+        print("\nGuido van Rossum created Python!")
+
+        print("\nProgramming is the process of giving")
+        print("instructions to a computer.")
+
+        print("\nExample:")
+        print("print('Hello World')")
+
+        print("\nOutput:")
+        print("Hello World")
+
+        # CODE LAB
+        print("\n===== CODE LAB =====")
+        print("Now YOU be the programmer!")
+
+        message = input("Type any message for Python to print: ")
+
+        print("\nYour code:")
+        print("print('" + message + "')")
+        print("\nOutput:")
+        print(message)
+
+        finish_lesson("1")
+
+    # LESSON 2
+    elif choice == "2":
+
+        countdown()
+
+        print("\n===== LESSON 2 =====")
+        print("BASIC SYNTAX")
+
+        print("\nSyntax means the rules of writing Python code.")
+
+        print("\nComments start with # and are ignored by Python:")
+        print("# this is a comment")
+
+        print("\nVariables store information:")
+        print("x = 5")
+        print("print(x)")
+
+        print("\nIndentation (spaces at the start of a line)")
+        print("groups code together:")
+        print("if x > 3:")
+        print("    print('big')")
+
+        # CODE LAB
+        print("\n===== CODE LAB =====")
+        print("Let's run a tiny program using YOUR number.")
+
+        x = ask_number("Pick a number for x: ")
+
+        print("\nYour code:")
+        print("# my first program")
+        print("x =", x)
+        print("print(x)")
+        print("if x > 3:")
+        print("    print('big')")
+        print("\nOutput:")
+        print(x)
+        if x > 3:
+            print("big")
+        else:
+            print("(nothing more, because x is not bigger than 3)")
+
+        finish_lesson("2")
+
+    # LESSON 3
+    elif choice == "3":
+
+        countdown()
+
+        print("\n===== LESSON 3 =====")
+        print("ARITHMETIC OPERATORS")
+
+        print("\nOperators let Python do math:")
+        print("+   add")
+        print("-   subtract")
+        print("*   multiply")
+        print("/   divide")
+        print("//  floor division (drops the decimals)")
+        print("%   remainder (modulo)")
+        print("**  power")
+
+        print("\nPython does * and / before + and -, like in math class.")
+
+        # CODE LAB
+        print("\n===== CODE LAB =====")
+        print("Pick two numbers and watch every operator work!")
+
+        a = ask_number("First number: ")
+        b = ask_number("Second number: ")
+
+        print("\nResults:")
+        print(a, "+", b, "=", a + b)
+        print(a, "-", b, "=", a - b)
+        print(a, "*", b, "=", a * b)
+
+        if b < 0:
+            print("(Power is skipped for negative exponents to keep things simple.)")
+        else:
+            print(a, "**", b, "=", a ** b)
+
+        if b == 0:
+            print("(Division, //, and % are skipped: you can't divide by zero!)")
+        else:
+            print(a, "/", b, "=", a / b)
+            print(a, "//", b, "=", a // b)
+            print(a, "%", b, "=", a % b)
+
+        finish_lesson("3")
+
+    # LESSON 4
+    elif choice == "4":
+
+        countdown()
+
+        print("\n===== LESSON 4 =====")
+        print("BASIC INPUT AND OUTPUT IN PYTHON")
+
+        print("\nOutput means showing information: print()")
+        print("Input means asking the user for information: input()")
+
+        print("\nExample:")
+        print("food = input('Favorite food? ')")
+        print("print('I love', food)")
+
+        print("\nIMPORTANT: input() always gives you TEXT.")
+        print("Use int() to turn text into a number.")
+
+        # CODE LAB
+        print("\n===== CODE LAB =====")
+
+        food = input("What is your favorite food? ")
+        print("I love", food)
+
+        print("\nNow let's see the text-vs-number trap!")
+        n = ask_number("Type a number: ")
+        text_n = str(n)
+
+        print("As TEXT:   '" + text_n + "' + '" + text_n + "' =", text_n + text_n)
+        print("As NUMBER: ", n, "+", n, "=", n + n)
+
+        finish_lesson("4")
+
+    # LESSON 5
+    elif choice == "5":
+
+        countdown()
+
+        print("\n===== LESSON 5 =====")
+        print("CONDITIONAL STATEMENTS IN PYTHON")
+
+        print("\nConditionals let your program make decisions.")
+        print("Keywords: if, elif (else if), else")
+
+        print("\nExample:")
+        print("if age >= 18:")
+        print("    print('Adult')")
+        print("elif age >= 13:")
+        print("    print('Teen')")
+        print("else:")
+        print("    print('Kid')")
+
+        # CODE LAB
+        print("\n===== CODE LAB =====")
+        print("Welcome to the Python Bouncer!")
+
+        age = ask_number("How old are you? ")
+
+        if age >= 18:
+            print("Bouncer says: Welcome to the adult zone!")
+        elif age >= 13:
+            print("Bouncer says: Teen zone is on your left!")
+        elif age >= 0:
+            print("Bouncer says: Kids zone is this way!")
+        else:
+            print("Bouncer says: Negative age? Nice try!")
+
+        finish_lesson("5")
+
+    # LESSON 6
+    elif choice == "6":
+
+        countdown()
+
+        print("\n===== LESSON 6 =====")
+        print("LOGICAL OPERATORS")
+
+        print("\nLogical operators combine True/False conditions:")
+        print("and  -> True only if BOTH sides are True")
+        print("or   -> True if AT LEAST ONE side is True")
+        print("not  -> flips True to False and False to True")
+
+        print("\nExample:")
+        print("has_ticket and old_enough")
+
+        # CODE LAB
+        print("\n===== CODE LAB =====")
+        print("Movie night checker! You need a ticket AND must be 13+.")
+
+        answer = input("Do you have a ticket? (yes/no): ")
+        has_ticket = answer.lower().strip() == "yes"
+        age = ask_number("How old are you? ")
+        old_enough = age >= 13
+
+        print("\nPython's thinking:")
+        print("has_ticket                =", has_ticket)
+        print("old_enough                =", old_enough)
+        print("has_ticket and old_enough =", has_ticket and old_enough)
+        print("has_ticket or old_enough  =", has_ticket or old_enough)
+        print("not has_ticket            =", not has_ticket)
+
+        if has_ticket and old_enough:
+            print("\nEnjoy the movie!")
+        else:
+            print("\nSorry, you can't get in this time.")
+
+        finish_lesson("6")
+
+    # LESSON 7
+    elif choice == "7":
+
+        countdown()
+
+        print("\n===== LESSON 7 =====")
+        print("INTRODUCTION TO ITERATION AND LOOPS")
+
+        print("\nA loop repeats code so you don't have to.")
+        print("for loop   -> repeat a set number of times")
+        print("while loop -> repeat while a condition is True")
+
+        print("\nExample:")
+        print("for i in range(1, 4):")
+        print("    print(i)")
+        print("\nOutput:")
+        print("1")
+        print("2")
+        print("3")
+
+        # CODE LAB
+        print("\n===== CODE LAB =====")
+        print("Let's build a times table with a for loop!")
+
+        number = ask_number("Pick a number: ")
+
+        print("\nYour code:")
+        print("for i in range(1, 6):")
+        print("    print(" + str(number) + ", 'x', i, '=', " + str(number) + " * i)")
+        print("\nOutput:")
+        for i in range(1, 6):
+            print(number, "x", i, "=", number * i)
+
+        print("\nNow a while loop that counts down:")
+        count = 3
+        while count > 0:
+            print(count)
+            count -= 1
+        print("Blast off!")
+
+        finish_lesson("7")
+
+    # VIEW MY ACHIEVEMENTS
+    elif choice == "8":
+
+        print("\n===== MY ACHIEVEMENTS =====")
+        print("Student:", name)
+        print("Total Points:", score)
+        print("Lessons completed:", len(completed), "of", len(BADGES))
+        print()
+
+        for lesson, badge in BADGES.items():
+            if lesson in completed:
+                print("[X]", badge)
+            else:
+                print("[ ]", badge, "(finish Lesson " + lesson + ")")
+
+        print()
+        if len(completed) >= 4:
+            print("[X] Halfway There - Finished 4 lessons")
+        else:
+            print("[ ] Halfway There - Finish 4 lessons")
+
+        if len(completed) == len(BADGES):
+            print("[X] PYTHON MASTER - Finished every lesson!")
+        else:
+            print("[ ] PYTHON MASTER - Finish every lesson")
+
+    # EXIT
+    elif choice == "9":
+
+        print("\nThanks for learning with us,", name + "!")
+        print("Final score:", score)
+        break
+
+    # INVALID CHOICE
+    else:
+        print("\nInvalid choice! Please select a valid lesson.")
+
+    input("\nPress ENTER to return to the menu...")
